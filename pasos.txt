@@ -1,0 +1,28 @@
+https://bluuweb.github.io/react-udemy/10-redux/#instaciones
+
+-. creacion proyecto
+-. instalacion dependencias
+npm i redux react-redux redux-devtools redux-thunk axios
+
+-. identificamos las api: https://pokeapi.co/api/v2/pokemon?offset=0&limit=20
+
+-. eliminacion de archivos limpiar proyecto.
+
+-. en el App.js se deja lo basico
+
+-.  configuracion carpetas de redux (pokeDucks (puede ser poke o spoty ) y store)
+
+
+https://github.com/zalmoxisus/redux-devtools-extension#12-advanced-store-setup
+
+
+-. Configuracion del ducks (constantes(initialState) types  reducers actions)
+
+ducks: https://github.com/erikras/ducks-modular-redux#the-proposal
+
+-.
+
+-. configuracion store.js en redux (solo se configura 1 vez)
+
+
+- 
