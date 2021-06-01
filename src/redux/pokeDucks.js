@@ -38,18 +38,33 @@ export const obtenerPokemonsAction = () => async ( dispatch, getState ) => {
     // se obtiene del state de redux
     // const { offset } = getState().pokemones;
 
+    if ( localStorage.getItem( 'offset=0' ) ) {
+        console.log( 'datos desde el localStorage' );
+        // Se envia al state el resultado de la consulta
+        dispatch( {
+            type: OBTENER_POKEMONES_EXITO,
+            payload: JSON.parse( localStorage.getItem( 'offset=0' ) )
+        } );
+        return;
+    }
+
 
     try {
+        console.log( 'datos desde la api' );
 
         const res = await axios.get( `https://pokeapi.co/api/v2/pokemon?offset=${ 0 }&limit=20` );
 
         console.log( res.data );
+
 
         // Se envia al state el resultado de la consulta
         dispatch( {
             type: OBTENER_POKEMONES_EXITO,
             payload: res.data
         } );
+
+        // guardar en localStorage
+        localStorage.setItem( 'offset=0', JSON.stringify( res.data ) );
 
         console.log( 'getState', getState().pokemones );
 
@@ -59,7 +74,7 @@ export const obtenerPokemonsAction = () => async ( dispatch, getState ) => {
 };
 
 // funcion del paginado de la siguiente
-export const siguientePokemonAccion = (  ) => async ( dispatch, getState ) => {
+export const siguientePokemonAccion = () => async ( dispatch, getState ) => {
 
     // console.log( { numero } );
     // // leemos el offset
@@ -68,6 +83,14 @@ export const siguientePokemonAccion = (  ) => async ( dispatch, getState ) => {
 
     // extrae la url de la siguiente consulta
     const { next } = getState().pokemones;
+
+    if ( localStorage.getItem( next ) ) {
+        dispatch( {
+            type: SIGUIENTE_POKEMONES_EXITO,
+            payload: JSON.parse( localStorage.getItem( next ) )
+        } );
+        return;
+    }
 
     try {
 
@@ -78,27 +101,39 @@ export const siguientePokemonAccion = (  ) => async ( dispatch, getState ) => {
             payload: res.data
         } );
 
+        // guardar en localStorage
+        localStorage.setItem( next, JSON.stringify( res.data ) );
+
     } catch ( error ) {
         console.log( error );
     }
 };
 
 
-export const anteriorPokemonAccion = (  ) => async ( dispatch, getState ) => {
-
-
+export const anteriorPokemonAccion = () => async ( dispatch, getState ) => {
 
     // extrae la url de la siguiente consulta
     const { previous } = getState().pokemones;
 
-    try {
+    if ( localStorage.getItem( previous ) ) {
+        dispatch( {
+            type: ANTERIOR_POKEMONES_EXITO,
+            payload: JSON.parse( localStorage.getItem( previous ) )
+        } );
+        return;
+    }
 
+    try {
         const res = await axios.get( `${ previous }` );
 
         dispatch( {
             type: ANTERIOR_POKEMONES_EXITO,
             payload: res.data
         } );
+
+        // guardar en localStorage
+        localStorage.setItem( previous, JSON.stringify( res.data ) );
+        
 
     } catch ( error ) {
         console.log( error );
