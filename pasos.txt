@@ -37,3 +37,25 @@ ducks: https://github.com/erikras/ducks-modular-redux#the-proposal
 -. config de firebase.js
 -. ir a la configuracion del sdk para pegar en el archivo
 -. se pasa el provider de redux al index
+
+----- ROUTER
+-. en app configuramos el router
+-. creacion de la plantilla delos otros componentes
+-. crear navbar y se le asocian los navlinks
+
+----- LOGIN
+-. crear boton de acceder en el componente login
+-. crear duck para los usuarios.(type, reducers, actions) y se importa el reducer en el store.js
+-. se crea en el duck la funcion cuando se va a acceder
+
+-. creacion de la funcion de leer usuario en el duck
+-. se llama leer usuario en el store
+
+-. se incluyen en la vista del login 
+
+-----CERRAR SESION---
+-. se crea el actio que cierra la sesion
+-. se ponen las condiciones en la navbar para los botones
+-. configuracion de las rtuas en app.jsx
+
+
