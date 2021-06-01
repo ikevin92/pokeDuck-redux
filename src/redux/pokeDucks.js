@@ -36,7 +36,7 @@ export default function pokeReducer ( state = dataInicial, action ) {
             };
 
         default:
-            return state;
+            return {...state};
     }
 }
 
