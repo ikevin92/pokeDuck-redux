@@ -1,4 +1,5 @@
 //import de hooks de redux
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 //importaciones del Duck
 import { anteriorPokemonAccion, detallePokemonAccion, obtenerPokemonsAction, siguientePokemonAccion } from '../redux/pokeDucks';
@@ -35,6 +36,14 @@ const Pokemones = () => {
         console.log( url );
         dispatch( detallePokemonAccion( url ) );
     };
+
+    useEffect( () => {
+        const loadData = ( ) => {
+            dispatch( obtenerPokemonsAction() );
+        };
+        loadData();
+    }, [ dispatch ] );
+
 
 
     return (
