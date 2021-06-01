@@ -30,3 +30,10 @@ ducks: https://github.com/erikras/ducks-modular-redux#the-proposal
 -. ponemos el provider y le asignamos la store
 
 -. con el getstate podemos acceder desde el Duck a los estados
+
+------ FIREBASE
+
+-. creacion del proyecto en firebase y habilitar la auth
+-. config de firebase.js
+-. ir a la configuracion del sdk para pegar en el archivo
+-. se pasa el provider de redux al index

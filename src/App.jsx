@@ -1,19 +1,41 @@
+// react router
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    Redirect,
+    useHistory,
+    useLocation
+} from "react-router-dom";
 
-import { Provider } from 'react-redux';
-// redux store
-import generateStore from './redux/store';
 
 import Pokemones from './components/Pokemones';
+import Navbar from './components/Navbar';
+import Login from './components/Login';
 
 function App () {
 
-    // inicializamos del store de redux
-    const store = generateStore();
 
     return (
-        <Provider store={ store } >
-            <Pokemones />
-        </Provider>
+        <Router>
+
+            {/* Barra del Nav */ }
+
+            <Navbar />
+
+            <div className="container mt-3">
+
+                <Switch>
+
+                    <Route path="/" component={ Pokemones } />
+                    <Route path="/login" component={ Login } />
+                
+                </Switch>
+
+            </div>
+
+        </Router>
     );
 }
 
