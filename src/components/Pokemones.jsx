@@ -1,7 +1,7 @@
 //import de hooks de redux
 import { useSelector, useDispatch } from 'react-redux';
 //importaciones del Duck
-import { obtenerPokemonsAction, siguientePokemonAccion } from '../redux/pokeDucks';
+import { anteriorPokemonAccion, obtenerPokemonsAction, siguientePokemonAccion } from '../redux/pokeDucks';
 
 
 const Pokemones = () => {
@@ -10,29 +10,45 @@ const Pokemones = () => {
     const dispatch = useDispatch();
 
     // selector para leer lo que esta en redux
-    const { listPoke } = useSelector( state => state.pokemones );
-    console.log( listPoke );
+    const { results, next, previous } = useSelector( state => state.pokemones );
+
+    // console.log( results );
 
     // funcion de boton
     const handleClick = () => {
         dispatch( obtenerPokemonsAction() );
     };
 
-    // funcionde siguiente paginado
-    const handleSiguiente = ( value = 10 ) => {
-        dispatch( siguientePokemonAccion( value ) );
+    // funcionde  paginado
+    const handleSiguiente = () => {
+        dispatch( siguientePokemonAccion() );
+    };
+
+    const handleAnterior = () => {
+        dispatch( anteriorPokemonAccion() );
     };
 
 
     return (
+
         <div>
             lista de pokemones
-            <button onClick={ handleClick }>Get Pokemones</button>
-            <button onClick={ () => handleSiguiente(20) }>Siguiente</button>
+            {
+                results.length < 1 &&
+                <button onClick={ handleClick }>Get Pokemones</button>
+            }
+            {
+                next &&
+                <button onClick={ handleSiguiente }>Siguiente</button>
+            }
+            {
+                previous &&
+                <button onClick={ handleAnterior }>Anterior</button>
+            }
 
             <ul>
                 {
-                    listPoke.map( ( item, idx ) => (
+                    results.map( ( item, idx ) => (
                         <li key={ idx }>{ item.name }</li>
                     ) )
                 }
