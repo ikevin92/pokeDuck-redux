@@ -10,6 +10,7 @@ npm i redux react-redux redux-devtools redux-thunk axios
 
 -. en el App.js se deja lo basico
 
+-----REDUX CONFIG ----
 -.  configuracion carpetas de redux (pokeDucks (puede ser poke o spoty ) y store)
 
 
@@ -20,9 +21,12 @@ https://github.com/zalmoxisus/redux-devtools-extension#12-advanced-store-setup
 
 ducks: https://github.com/erikras/ducks-modular-redux#the-proposal
 
--.
+-. DUCKS: primero type, luego el reducer y finalmente la funcion
 
--. configuracion store.js en redux (solo se configura 1 vez)
+-. configuracion store.js en redux (solo se configura 1 vez): tomar como ejemplo la de poke pero tener cuidado con los reducer
 
+-. crear componente del Home o el de las rutas
 
-- 
+-. ponemos el provider y le asignamos la store
+
+-. con el getstate podemos acceder desde el Duck a los estados
