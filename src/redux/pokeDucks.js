@@ -5,13 +5,15 @@ const dataInicial = {
     count: 0,
     next: null,
     previous: null,
-    results: []
+    results: [],
+    detalle: null
 };
 
 // types
 const OBTENER_POKEMONES_EXITO = 'OBTENER_POKEMONES_EXITO';
 const SIGUIENTE_POKEMONES_EXITO = 'SIGUIENTE_POKEMONES_EXITO';
 const ANTERIOR_POKEMONES_EXITO = 'ANTERIOR_POKEMONES_EXITO';
+const DETALLE_POKEMON = 'DETALLE_POKEMON';
 
 // reducer
 export default function pokeReducer ( state = dataInicial, action ) {
@@ -26,12 +28,51 @@ export default function pokeReducer ( state = dataInicial, action ) {
                 ...action.payload
             };
 
+        case DETALLE_POKEMON:
+            return {
+                ...state,
+                detalle: action.payload
+
+            };
+
         default:
             return state;
     }
 }
 
 // actions
+export const detallePokemonAccion = ( url = 'https://pokeapi.co/api/v2/pokemon/1/' ) => async ( dispatch, getState ) => {
+
+    if ( localStorage.getItem( url ) ) {
+
+        dispatch( {
+            type: DETALLE_POKEMON,
+            payload: JSON.parse( localStorage.getItem( url ) )
+        } );
+
+        return;
+    }
+
+
+    try {
+        const res = await axios.get( url );
+        console.log( res.data );
+
+        dispatch( {
+            type: DETALLE_POKEMON,
+            payload: res.data
+        } );
+
+        localStorage.setItem( url, JSON.stringify( res.data ) );
+
+
+    } catch ( error ) {
+        console.log( error );
+    }
+
+};
+
+
 export const obtenerPokemonsAction = () => async ( dispatch, getState ) => {
 
     // console.log( getState().pokemones)
@@ -133,7 +174,7 @@ export const anteriorPokemonAccion = () => async ( dispatch, getState ) => {
 
         // guardar en localStorage
         localStorage.setItem( previous, JSON.stringify( res.data ) );
-        
+
 
     } catch ( error ) {
         console.log( error );

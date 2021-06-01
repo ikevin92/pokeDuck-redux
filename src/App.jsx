@@ -1,8 +1,7 @@
 
 import { Provider } from 'react-redux';
-// redux
+// redux store
 import generateStore from './redux/store';
-
 
 import Pokemones from './components/Pokemones';
 
